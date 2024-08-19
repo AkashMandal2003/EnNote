@@ -45,7 +45,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Size(max = 50)
+    @Size(max = 250)
     @Column(name = "password")
     @JsonIgnore
     private String password;
