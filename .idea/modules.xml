@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/EnNote.iml" filepath="$PROJECT_DIR$/.idea/EnNote.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ennote-backend/ennote-backend.iml" filepath="$PROJECT_DIR$/ennote-backend/ennote-backend.iml" />
     </modules>
   </component>
 </project>
