@@ -21,8 +21,8 @@ target/
 
 EnNote.txt
 SpringSecurity.pdf
-ennote-backend/src/main/java/com/akash/ennote/security/CustomLoggingFilter
-ennote-backend/src/main/java/com/akash/ennote/security/RequestValidationFilter
+ennote-backend/src/main/java/com/akash/ennote/security/CustomLoggingFilter.java
+ennote-backend/src/main/java/com/akash/ennote/security/RequestValidationFilter.java
 
 ### NetBeans ###
 /nbproject/private/
