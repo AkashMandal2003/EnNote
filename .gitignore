@@ -58,6 +58,8 @@ ennote-backend/*.iws
 ennote-backend/*.iml
 ennote-backend/*.ipr
 
+.idea
+
 # Specific files
 ennote-backend/EnNote.txt
 ennote-backend/SpringSecurity.pdf
@@ -79,3 +81,5 @@ ennote-backend/build/
 # Visual Studio Code
 ennote-backend/.vscode/
 ennote-frontend-react/.vscode/
+
+
