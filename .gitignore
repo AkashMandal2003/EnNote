@@ -1,38 +1,81 @@
+# Node.js dependencies
+ennote-frontend-react/node_modules
+ennote-frontend-react/.pnp
+ennote-frontend-react/.pnp.js
+
+# Testing
+ennote-frontend-react/coverage
+
+# Production
+ennote-frontend-react/build
+
+# Miscellaneous
+ennote-frontend-react/.DS_Store
+ennote-frontend-react/.env
+ennote-frontend-react/.env.local
+ennote-frontend-react/.env.development.local
+ennote-frontend-react/.env.test.local
+ennote-frontend-react/.env.production.local
+
+ennote-frontend-react/npm-debug.log*
+ennote-frontend-react/yarn-debug.log*
+ennote-frontend-react/yarn-error.log*
+
+# IDEs and Editors
+ennote-frontend-react/.idea
+ennote-frontend-react/.vscode
+ennote-frontend-react/*.suo
+ennote-frontend-react/*.ntvs*
+ennote-frontend-react/*.njsproj
+ennote-frontend-react/*.sln
+ennote-frontend-react/*.sw?
+
+# Service worker
+ennote-frontend-react/service-worker.js
+
+# Temporary files
+ennote-frontend-react/.tmp/
+
+# Maven
 ennote-backend/HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+ennote-backend/target/
+!ennote-backend/.mvn/wrapper/maven-wrapper.jar
+!ennote-backend/**/src/main/**/target/
+!ennote-backend/**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Spring Tool Suite (STS)
+ennote-backend/.apt_generated
+ennote-backend/.classpath
+ennote-backend/.factorypath
+ennote-backend/.project
+ennote-backend/.settings
+ennote-backend/.springBeans
+ennote-backend/.sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# IntelliJ IDEA
+ennote-backend/.idea
+ennote-backend/*.iws
+ennote-backend/*.iml
+ennote-backend/*.ipr
 
-EnNote.txt
-SpringSecurity.pdf
-/ennote-backend/src/main/java/com/akash/ennote/security/CustomLoggingFilter.java
-/ennote-backend/src/main/java/com/akash/ennote/security/RequestValidationFilter.java
+# Specific files
+ennote-backend/EnNote.txt
+ennote-backend/SpringSecurity.pdf
+ennote-backend/src/main/java/com/akash/ennote/security/CustomLoggingFilter.java
+ennote-backend/src/main/java/com/akash/ennote/security/RequestValidationFilter.java
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# NetBeans
+ennote-backend/nbproject/private/
+ennote-backend/nbbuild/
+ennote-backend/dist/
+ennote-backend/nbdist/
+ennote-backend/.nb-gradle/
 
-### VS Code ###
-.vscode/
+# Build directories
+ennote-backend/build/
+!ennote-backend/**/src/main/**/build/
+!ennote-backend/**/src/test/**/build/
+
+# Visual Studio Code
+ennote-backend/.vscode/
+ennote-frontend-react/.vscode/
