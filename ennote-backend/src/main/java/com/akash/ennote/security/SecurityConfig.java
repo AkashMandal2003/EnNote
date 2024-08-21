@@ -23,8 +23,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import java.time.LocalDate;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 
 @Configuration
 @EnableWebSecurity
