@@ -5,20 +5,21 @@ import com.akash.ennote.entity.Role;
 import com.akash.ennote.entity.User;
 import com.akash.ennote.repository.RoleRepository;
 import com.akash.ennote.repository.UserRepository;
+import com.akash.ennote.security.jwt.JwtAuthEntryPoint;
+import com.akash.ennote.security.jwt.JwtAuthTokenFilter;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-
-import javax.sql.DataSource;
 
 import java.time.LocalDate;
 
@@ -32,6 +33,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
         jsr250Enabled = true)
 public class SecurityConfig {
 
+    private final JwtAuthEntryPoint unauthorizedHandler;
+
+    public SecurityConfig(JwtAuthEntryPoint unauthorizedHandler) {
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
+
+    @Bean
+    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilter();
+    }
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -43,35 +54,26 @@ public class SecurityConfig {
                 requests
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/csrf-token").permitAll()
+                        .requestMatchers("/api/auth/public/**").permitAll()
                         .anyRequest().authenticated());
+        http.exceptionHandling(exception
+                -> exception.authenticationEntryPoint(unauthorizedHandler));
+        http.addFilterBefore(authenticationJwtTokenFilter(),
+                UsernamePasswordAuthenticationFilter.class);
+        //http.formLogin(withDefaults());
+        //http.httpBasic(withDefaults());
         //http.csrf(AbstractHttpConfigurer::disable);
         //http.addFilterBefore(new CustomLoggingFilter(), UsernamePasswordAuthenticationFilter.class);
         //http.addFilterAfter(new RequestValidationFilter(), CustomLoggingFilter.class);
-        http.httpBasic(withDefaults());
         return http.build();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService(DataSource dataSource) {
-//        JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-//        if(!manager.userExists("user1")){
-//            manager.createUser(
-//                    User.withUsername("user1")
-//                            .password("{noop}password1")
-//                            .roles("USER")
-//                            .build()
-//            );
-//        }
-//        if(!manager.userExists("admin")){
-//            manager.createUser(
-//                    User.withUsername("admin")
-//                            .password("{noop}admin")
-//                            .roles("ADMIN")
-//                            .build()
-//            );
-//        }
-//        return manager;
-//    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -118,5 +120,28 @@ public class SecurityConfig {
             }
         };
     }
+
+
+    //    @Bean
+    //    public UserDetailsService userDetailsService(DataSource dataSource) {
+    //        JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+    //        if(!manager.userExists("user1")){
+    //            manager.createUser(
+    //                    User.withUsername("user1")
+    //                            .password("{noop}password1")
+    //                            .roles("USER")
+    //                            .build()
+    //            );
+    //        }
+    //        if(!manager.userExists("admin")){
+    //            manager.createUser(
+    //                    User.withUsername("admin")
+    //                            .password("{noop}admin")
+    //                            .roles("ADMIN")
+    //                            .build()
+    //            );
+    //        }
+    //        return manager;
+    //    }
 
 }

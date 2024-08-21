@@ -9,7 +9,7 @@ public interface UserService {
 
     void updateUserRole(Long userId, String roleName);
 
-    List<User> getAllUsers();
+    List<UserDTO> getAllUsers();
 
     UserDTO getUserById(Long userId);
 
