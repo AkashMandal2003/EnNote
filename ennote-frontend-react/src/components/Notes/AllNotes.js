@@ -18,7 +18,7 @@ const AllNotes = () => {
 
       const parsedNotes = response.data.map((note) => ({
         ...note,
-        parsedContent: JSON.parse(note.content).content, // Assuming each note's content is JSON-formatted.
+        parsedContent: JSON.parse(note.content).content,
       }));
       setNotes(parsedNotes);
     } catch (error) {
@@ -30,7 +30,6 @@ const AllNotes = () => {
   };
 
   useEffect(() => {
-    //calling the function here to fetch all notes
     fetchNotes();
   }, []);
 
@@ -39,6 +38,10 @@ const AllNotes = () => {
     return <Errors message={error} />;
   }
 
+  // const sortedNotes = [...notes].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const sortedNotes = [...notes].sort((a, b) => b.id - a.id);
+  // console.log(sortedNotes);
+  
   return (
     <div className="min-h-[calc(100vh-74px)] sm:py-10 sm:px-5 px-0 py-4">
       <div className="w-[92%] mx-auto ">
@@ -86,8 +89,13 @@ const AllNotes = () => {
             ) : (
               <>
                 <div className="pt-10 grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-y-10 gap-x-5 justify-center">
-                  {notes.map((item) => (
-                    <NoteItems key={item.id} {...item} id={item.id} />
+                  {sortedNotes.map((item) => (
+                    <NoteItems
+                      key={item.id}
+                      id={item.id}
+                      parsedContent={item.parsedContent}
+                      createdAt={item.createdAt}
+                    />
                   ))}
                 </div>
               </>

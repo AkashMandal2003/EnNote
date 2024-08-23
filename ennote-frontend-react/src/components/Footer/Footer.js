@@ -36,31 +36,35 @@ const Footer = () => {
         </ul>
 
         <p className="w-fit  flex items-center text-white text-sm">
-          <span>&copy;{currentYear} SecureNote | All rights reserved.</span>
+          <span>&copy;{currentYear} EnNote | All rights reserved.</span>
         </p>
 
         <div className="flex-1  flex flex-row gap-6 lg:justify-end justify-start items-center">
           <Link
             className="text-white border h-10 w-10 flex justify-center items-center border-white rounded-full p-2 hover:bg-blue-600 transition-colors duration-300"
             to="https://facebook.com"
+            target="_blank"
           >
             <FaFacebookF width={20} height={20} />
           </Link>{" "}
           <Link
             className="text-white border h-10 w-10 flex justify-center items-center border-white rounded-full p-2 hover:bg-blue-600 transition-colors duration-300"
-            to="https://facebook.com"
+            to="https://www.linkedin.com/in/akashmandal2003/"
+            target="_blank"
           >
             <FaLinkedinIn width={20} height={20} />
           </Link>{" "}
           <Link
             className="text-white border h-10 w-10 flex justify-center items-center border-white rounded-full p-2 hover:bg-blue-600 transition-colors duration-300"
-            to="https://facebook.com"
+            to="https://twitter.com"
+            target="_blank"
           >
             <FaTwitter width={20} height={20} />
           </Link>{" "}
           <Link
             className="text-white border h-10 w-10 flex justify-center items-center border-white rounded-full p-2 hover:bg-blue-600 transition-colors duration-300"
-            to="https://facebook.com"
+            to="https://www.instagram.com/_https.akaash/"
+            target="_blank"
           >
             <FaInstagram width={20} height={20} />
           </Link>

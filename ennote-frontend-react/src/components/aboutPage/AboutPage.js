@@ -10,11 +10,11 @@ import {
 
 const AboutPage = () => {
   return (
-    <div className=" p-8   bg-gray-100 min-h-screen">
-      <div className="md:w-1/2">
-        <h1 className="text-4xl font-bold mb-4">About Us</h1>
-        <p className="mb-4">
-          Welcome to SecureNote, your trusted companion for secure and private
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="bg-white rounded-lg shadow-md p-8 md:w-1/2 lg:w-1/3">
+        <h1 className="text-4xl font-bold mb-4 text-center">About Us</h1>
+        <p className="mb-4 text-center">
+          Welcome to EnNote, your trusted companion for secure and private
           note-taking. We believe in providing a safe space where your thoughts
           and ideas are protected with the highest level of security. Our
           mission is to ensure that your notes are always accessible to you and
@@ -28,27 +28,31 @@ const AboutPage = () => {
             Add an extra layer of security with two-factor authentication.
           </li>
           <li className="mb-2">
-            Your notes are encrypted from the moment you create them
+            Your notes are encrypted from the moment you create them.
           </li>
           <li className="mb-2">
             Access your notes from anywhere with the assurance that they are
-            stored .
+            stored securely.
           </li>
           <li className="mb-2">
             Our app is designed to be intuitive and easy to use.
           </li>
         </ul>
-        <div className="flex space-x-4 mt-10">
-          <Link className="text-white rounded-full p-2 bg-customRed  " to="/">
+        <div className="flex justify-around space-x-4 mt-10">
+          <Link className="text-white rounded-full p-2 bg-customRed  " to="https://facebook.com"
+            target="_blank">
             <FaFacebookF size={24} />
           </Link>
-          <Link className="text-white rounded-full p-2 bg-customRed  " to="/">
+          <Link className="text-white rounded-full p-2 bg-customRed  " to="https://twitter.com"
+            target="_blank">
             <FaTwitter size={24} />
           </Link>
-          <Link className="text-white rounded-full p-2 bg-customRed  " to="/">
+          <Link className="text-white rounded-full p-2 bg-customRed  " to="https://www.linkedin.com/in/akashmandal2003/"
+            target="_blank">
             <FaLinkedinIn size={24} />
           </Link>
-          <Link className="text-white rounded-full p-2 bg-customRed  " to="/">
+          <Link className="text-white rounded-full p-2 bg-customRed  " to="https://www.instagram.com/_https.akaash/"
+            target="_blank">
             <FaInstagram size={24} />
           </Link>
         </div>
@@ -58,3 +62,6 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+
+

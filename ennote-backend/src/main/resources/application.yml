@@ -16,6 +16,9 @@ spring:
     app:
         jwtSecret: "a6eac1a0ae42d3e466b45dd4610e18decdb339b59bda075853ae0229fd4edc35"
         jwtExpirationMs: "172800000"
+        frontend:
+            url: "http://localhost:3000"
+
 logging:
     level:
         org:

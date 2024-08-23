@@ -5,6 +5,7 @@ import com.akash.ennote.repository.NoteRepository;
 import com.akash.ennote.services.NoteService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,6 +23,7 @@ public class NoteServiceImpl implements NoteService {
         Note note = new Note();
         note.setContent(content);
         note.setOwnerUserName(userName);
+        note.setCreatedAt(new Date());
         return noteRepository.save(note);
     }
 
