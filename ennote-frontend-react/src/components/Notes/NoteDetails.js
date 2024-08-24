@@ -110,14 +110,14 @@ const NoteDetails = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-74px)] md:px-10 md:py-8 sm:px-6 py-4 px-4 bg-slate-400">
+    <div className="min-h-[calc(100vh-74px)] md:px-10 md:py-8 sm:px-6 py-4 px-4 bg-slate-300">
       <Buttons
         onClickhandler={onBackHandler}
         className="bg-btnColor px-4 py-2 rounded-md text-white hover:text-slate-200 mb-3"
       >
         Go Back
       </Buttons>
-      <div className="py-6 px-8 min-h-customHeight shadow-lg shadow-gray-300 rounded-md bg-slate-300">
+      <div className="py-6 px-8 min-h-customHeight shadow-2xl shadow-black rounded-md bg-white">
         <>
           {!loading && (
             <div className="flex justify-end py-2 gap-2">

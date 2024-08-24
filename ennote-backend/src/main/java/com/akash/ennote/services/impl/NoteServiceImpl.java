@@ -2,6 +2,7 @@ package com.akash.ennote.services.impl;
 
 import com.akash.ennote.entity.Note;
 import com.akash.ennote.repository.NoteRepository;
+import com.akash.ennote.services.AuditLogService;
 import com.akash.ennote.services.NoteService;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,11 @@ public class NoteServiceImpl implements NoteService {
 
     private  final NoteRepository noteRepository;
 
-    public NoteServiceImpl(NoteRepository noteRepository) {
+    private final AuditLogService auditLogService;
+
+    public NoteServiceImpl(NoteRepository noteRepository, AuditLogService auditLogService) {
         this.noteRepository = noteRepository;
+        this.auditLogService = auditLogService;
     }
 
     @Override
@@ -24,7 +28,9 @@ public class NoteServiceImpl implements NoteService {
         note.setContent(content);
         note.setOwnerUserName(userName);
         note.setCreatedAt(new Date());
-        return noteRepository.save(note);
+        Note savedNote = noteRepository.save(note);
+        auditLogService.logNoteCreation(userName, note);
+        return savedNote;
     }
 
     @Override
@@ -33,12 +39,16 @@ public class NoteServiceImpl implements NoteService {
                 ()-> new RuntimeException("Note not found")
         );
         note.setContent(content);
-        return noteRepository.save(note);
+        Note updatedNote = noteRepository.save(note);
+        auditLogService.logNoteUpdate(userName, note);
+        return updatedNote;
     }
 
     @Override
     public void deleteNoteForUser(Long noteId, String userName) {
-        noteRepository.deleteById(noteId);
+        Note note=noteRepository.findById(noteId).orElseThrow(()->new RuntimeException("Note not found"));
+        auditLogService.logNoteDeletion(userName, noteId);
+        noteRepository.delete(note);
     }
 
     @Override
