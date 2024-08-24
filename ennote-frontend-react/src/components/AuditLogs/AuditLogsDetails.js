@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/api";
 import { DataGrid } from "@mui/x-data-grid";
 import { Blocks } from "react-loader-spinner";
+import Buttons from "../../utils/Buttons";
 import Errors from "../Errors.js";
 import moment from "moment";
 
@@ -15,6 +16,7 @@ const AuditLogsDetails = () => {
   const [auditLogs, setAuditLogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const fetchSingleAuditLogs = useCallback(async () => {
     setLoading(true);
@@ -59,8 +61,18 @@ const AuditLogsDetails = () => {
     return <Errors message={error} />;
   }
 
+  const onBackHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="p-4">
+      <Buttons
+        onClickhandler={onBackHandler}
+        className="bg-btnColor px-4 py-2 rounded-md text-white hover:text-slate-200 mb-3"
+      >
+        Go Back
+      </Buttons>
       <div className="py-6">
         {auditLogs.length > 0 && (
           <h1 className="text-center sm:text-2xl text-lg font-bold text-slate-800 ">

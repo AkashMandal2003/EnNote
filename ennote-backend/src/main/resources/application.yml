@@ -19,6 +19,24 @@ spring:
         frontend:
             url: "http://localhost:3000"
 
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: "am5857516@gmail.com"
+        password: "pupycuvvnyryadwx"
+        protocol: smtp
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
+email:
+    from: "am5857516@gmail.com"
+    fromName: "Akash Mandal"
+
+
 logging:
     level:
         org:

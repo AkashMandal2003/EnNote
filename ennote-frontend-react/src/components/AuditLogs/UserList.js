@@ -192,7 +192,7 @@ const UserList = () => {
               }}
               disableRowSelectionOnClick
               pageSizeOptions={[6]}
-              disableColumnResize
+              // disableColumnResize
             />
           </>
         )}
