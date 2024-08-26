@@ -54,6 +54,7 @@ public class SecurityConfig {
         http.csrf(csrf ->
                 csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers("/api/auth/public/**")
+                        .ignoringRequestMatchers("/api/contact/send")
         );
         http.authorizeHttpRequests((requests) ->
                 requests
@@ -61,6 +62,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/csrf-token").permitAll()
                         .requestMatchers("/api/auth/public/**").permitAll()
                         .requestMatchers("/oauth2/**").permitAll()
+                        .requestMatchers("/api/contact/send").permitAll()
                         .anyRequest().authenticated()).oauth2Login(oauth2->{
                             oauth2.successHandler(oAuth2LoginSuccessHandler);
         });
