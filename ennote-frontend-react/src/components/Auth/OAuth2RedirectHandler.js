@@ -21,9 +21,10 @@ const OAuth2RedirectHandler = () => {
 
         localStorage.setItem('JWT_TOKEN', token);
 
+        const roles = decodedToken.roles ? decodedToken.roles.split(',') : [];
         const user = {
           username: decodedToken.sub,
-          roles: decodedToken.roles.split(','),
+          roles: roles,
         };
         console.log("User Object:", user);
         localStorage.setItem('USER', JSON.stringify(user));

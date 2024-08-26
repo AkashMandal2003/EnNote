@@ -8,8 +8,10 @@ import com.akash.ennote.entity.User;
 import com.akash.ennote.repository.PasswordResetTokenRepository;
 import com.akash.ennote.repository.RoleRepository;
 import com.akash.ennote.repository.UserRepository;
+import com.akash.ennote.services.TotpService;
 import com.akash.ennote.services.UserService;
 import com.akash.ennote.utils.EmailService;
+import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,15 +37,18 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordResetTokenRepository passwordResetTokenRepository;
 
-    private final EmailService emailService;;
+    private final EmailService emailService;
+
+    private final TotpService totpService;
 
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, PasswordResetTokenRepository passwordResetTokenRepository, EmailService emailService) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, PasswordResetTokenRepository passwordResetTokenRepository, EmailService emailService, TotpService totpService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.emailService = emailService;
+        this.totpService = totpService;
     }
 
     @Override
@@ -72,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-       return userRepository.findByUserName(username).orElseThrow(() -> new RuntimeException("User not found with username: " + username));
+       return userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("User not found with username: " + username));
     }
 
     @Override
@@ -158,6 +164,52 @@ public class UserServiceImpl implements UserService {
 
         resetToken.setUsed(true);
         passwordResetTokenRepository.save(resetToken);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        Optional<User> user=userRepository.findByEmail(email);
+        return user;
+    }
+
+    @Override
+    public User registerUser(User user) {
+        if (user.getPassword() != null)
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+
+    @Override
+    public GoogleAuthenticatorKey generate2FASecret(Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        GoogleAuthenticatorKey key = totpService.generateSecret();
+        user.setTwoFactorSecret(key.getKey());
+        userRepository.save(user);
+        return key;
+    }
+
+    @Override
+    public boolean validate2FACode(Long userId, int code){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return totpService.verifyCode(user.getTwoFactorSecret(), code);
+    }
+
+    @Override
+    public void enable2FA(Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setTwoFactorEnabled(true);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void disable2FA(Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setTwoFactorEnabled(false);
+        userRepository.save(user);
     }
 
     private UserDTO convertToDto(User user) {

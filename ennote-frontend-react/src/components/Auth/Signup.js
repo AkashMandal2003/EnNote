@@ -87,7 +87,7 @@ const Signup = () => {
       >
         <div>
           <h1 className="font-montserrat text-center font-bold text-2xl">
-            Register Here Here
+            Register Here
           </h1>
           <p className="text-slate-600 text-center">
             Enter your credentials to create new account

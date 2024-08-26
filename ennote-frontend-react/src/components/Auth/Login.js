@@ -163,7 +163,7 @@ const Login = () => {
 
             <div className="flex flex-col gap-2">
               <InputField
-                label="UserName"
+                label="Email"
                 required
                 id="username"
                 type="text"

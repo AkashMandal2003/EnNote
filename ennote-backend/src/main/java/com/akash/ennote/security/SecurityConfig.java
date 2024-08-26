@@ -1,5 +1,6 @@
 package com.akash.ennote.security;
 
+import com.akash.ennote.config.OAuth2LoginSuccessHandler;
 import com.akash.ennote.entity.AppRole;
 import com.akash.ennote.entity.Role;
 import com.akash.ennote.entity.User;
@@ -7,9 +8,11 @@ import com.akash.ennote.repository.RoleRepository;
 import com.akash.ennote.repository.UserRepository;
 import com.akash.ennote.security.jwt.JwtAuthEntryPoint;
 import com.akash.ennote.security.jwt.JwtAuthTokenFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -33,6 +36,10 @@ public class SecurityConfig {
 
     private final JwtAuthEntryPoint unauthorizedHandler;
 
+    @Autowired
+    @Lazy
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+
     public SecurityConfig(JwtAuthEntryPoint unauthorizedHandler) {
         this.unauthorizedHandler = unauthorizedHandler;
     }
@@ -53,7 +60,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/csrf-token").permitAll()
                         .requestMatchers("/api/auth/public/**").permitAll()
-                        .anyRequest().authenticated());
+                        .requestMatchers("/oauth2/**").permitAll()
+                        .anyRequest().authenticated()).oauth2Login(oauth2->{
+                            oauth2.successHandler(oAuth2LoginSuccessHandler);
+        });
         http.exceptionHandling(exception
                 -> exception.authenticationEntryPoint(unauthorizedHandler));
         http.addFilterBefore(authenticationJwtTokenFilter(),

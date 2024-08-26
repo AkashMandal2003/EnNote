@@ -3,8 +3,10 @@ package com.akash.ennote.services;
 import com.akash.ennote.dtos.UserDTO;
 import com.akash.ennote.entity.Role;
 import com.akash.ennote.entity.User;
+import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -32,4 +34,15 @@ public interface UserService {
 
     void resetPassword(String token, String newPassword);
 
+    Optional<User> findByEmail(String email);
+
+    User registerUser(User user);
+
+    GoogleAuthenticatorKey generate2FASecret(Long userId);
+
+    boolean validate2FACode(Long userId, int code);
+
+    void enable2FA(Long userId);
+
+    void disable2FA(Long userId);
 }
