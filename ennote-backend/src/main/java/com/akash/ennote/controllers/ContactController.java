@@ -19,7 +19,7 @@ public class ContactController {
                 + "Message: " + form.getMessage();
 
         emailService.sendEmail(
-                form.getEmail(),
+                "am5857516@gmail.com",
                 "am5857516@gmail.com",
                 "New Contact Form Submission",
                 emailBody
