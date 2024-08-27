@@ -130,9 +130,9 @@ const Login = () => {
               <h1 className="font-montserrat text-center font-bold text-2xl">
                 Login Here
               </h1>
-              <p className="text-slate-600 text-center">
-                Please Enter your username and password{" "}
-              </p>
+              {/* <p className="text-slate-600 text-center">
+                Please Enter your email and password{" "}
+              </p> */}
               <div className="flex items-center justify-between gap-1 py-5 ">
                 <Link
                   to={`${apiUrl}/oauth2/authorization/google`}
@@ -167,8 +167,8 @@ const Login = () => {
                 required
                 id="username"
                 type="text"
-                message="*UserName is required"
-                placeholder="type your username"
+                message="*Email is required"
+                placeholder="type your email"
                 register={register}
                 errors={errors}
               />{" "}
@@ -186,7 +186,7 @@ const Login = () => {
             <Buttons
               disabled={loading}
               onClickhandler={() => {}}
-              className="bg-customRed font-semibold text-white w-full py-2 hover:text-slate-400 transition-colors duration-100 rounded-sm my-3"
+              className="bg-lime-600 rounded-xl font-semibold text-white w-full py-2 hover:text-slate-400 transition-colors duration-100 my-3"
               type="text"
             >
               {loading ? <span>Loading...</span> : "LogIn"}

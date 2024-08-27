@@ -61,12 +61,12 @@ const LandingPage = () => {
           ) : (
             <>
               <Link to="/login">
-                <Buttons className="sm:w-52 w-44 bg-customRed font-semibold hover:scale-105 transition-all duration-200 cursor-pointer text-white px-10 py-3 rounded-sm">
+                <Buttons className="sm:w-52 w-44 bg-lime-500 font-semibold hover:scale-105 transition-all duration-200 cursor-pointer text-white px-10 py-3 rounded-3xl">
                   SignIn
                 </Buttons>
               </Link>
               <Link to="/signup">
-                <Buttons className="sm:w-52 w-44 bg-btnColor font-semibold hover:scale-105 transition-all duration-200 cursor-pointer text-white px-10 py-3 rounded-sm">
+                <Buttons className="sm:w-52 w-44 bg-btnColor font-semibold hover:scale-105 transition-all duration-200 cursor-pointer text-white px-10 py-3 rounded-3xl">
                   SignUp
                 </Buttons>
               </Link>
@@ -80,7 +80,7 @@ const LandingPage = () => {
           </h1>
           <Brands />
           <State />
-          <div className="pb-10">
+          {/* <div className="pb-10">
             <h1
               className="font-montserrat uppercase text-headerColor pb-16  xl:text-headerText md:text-4xl text-2xl  mx-auto text-center font-bold sm:w-[95%] w-full"
               variants={fadeInFromBotom}
@@ -88,7 +88,7 @@ const LandingPage = () => {
               Testimonial
             </h1>
             <Testimonial />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

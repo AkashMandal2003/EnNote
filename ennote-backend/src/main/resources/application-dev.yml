@@ -1,0 +1,53 @@
+spring:
+    application:
+        name: EnNote
+    security:
+        oauth2:
+            client:
+                registration:
+                    github:
+                        client-id: ${GITHUB_CLIENT_ID}
+                        client-secret: ${GITHUB_CLIENT_SECRET}
+                        scope: read:user,user:email
+                    google:
+                        client-id: ${GOOGLE_CLIENT_ID}
+                        client-secret: ${GOOGLE_CLIENT_SECRET}
+    datasource:
+        url:  ${DATASOURCE_DEV_URL}
+        username: ${DATASOURCE_DEV_USERNAME}
+        password: ${DATASOURCE_DEV_PASSWORD}
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+    app:
+        jwtSecret: ${JWT_SECRET}
+        jwtExpirationMs: ${JWT_EXPIRATION}
+        frontend:
+            url: ${FRONT_END_URL}
+
+    mail:
+        host: ${MAIL_HOST}
+        port: 587
+        username: ${MAIL_USERNAME}
+        password: ${MAIL_PASSWORD}
+        protocol: smtp
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
+email:
+    from: ${MAIL_USERNAME}
+    fromName: ${MAIL_HEADLINE}
+
+
+logging:
+    level:
+        org:
+            springframework:
+                security: debug
+        root: info
+

@@ -89,9 +89,9 @@ const Signup = () => {
           <h1 className="font-montserrat text-center font-bold text-2xl">
             Register Here
           </h1>
-          <p className="text-slate-600 text-center">
+          {/* <p className="text-slate-600 text-center">
             Enter your credentials to create new account
-          </p>
+          </p> */}
           <div className="flex items-center justify-between gap-1 py-5 ">
             <a
               href={`${apiUrl}/oauth2/authorization/google`}
@@ -122,7 +122,7 @@ const Signup = () => {
 
         <div className="flex flex-col gap-2">
           <InputField
-            label="UserName"
+            label="Username"
             required
             id="username"
             type="text"
@@ -156,7 +156,7 @@ const Signup = () => {
         <Buttons
           disabled={loading}
           onClickhandler={() => {}}
-          className="bg-customRed font-semibold flex justify-center text-white w-full py-2 hover:text-slate-400 transition-colors duration-100 rounded-sm my-3"
+          className="bg-btnColor rounded-lg font-semibold flex justify-center text-white w-full py-2 hover:text-slate-400 transition-colors duration-100 my-3"
           type="text"
         >
           {loading ? <span>Loading...</span> : "Register"}

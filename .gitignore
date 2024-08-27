@@ -59,6 +59,7 @@ ennote-backend/*.iml
 ennote-backend/*.ipr
 
 .idea
+ennote-backend/.env
 
 # Specific files
 ennote-backend/EnNote.txt
