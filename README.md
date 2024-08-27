@@ -5,6 +5,6 @@ act of securely entering and managing notes, aligning well with the app's purpos
 of providing a secure space for users to access and manage their notes. The name
 conveys a sense of security and organization, essential for a secure note app.
 
-#Frontend Part
+# Frontend Part
 Here you can access the frontend part
 https://github.com/AkashMandal2003/EnNote-Frontend
